@@ -8,6 +8,5 @@ I used Spring Boot to implement my microservices, Additionally I used these Libr
   Used to validate FxDeals data to prevent broken data. 
 * Spring Data JPA:
   Used to establish database connection and execute queries through hibernate implementation.
-  
-  ---
-  
+---
+
