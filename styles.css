@@ -1,0 +1,11 @@
+.background {
+    background-color: lightgray;
+    padding: 10px;
+    border: 1px solid black;
+}
+.note {
+    background-color: #f0f0f0;
+    border-left: 6px solid #4CAF50; /* Green border */
+    padding: 10px;
+    margin-bottom: 20px;
+}

@@ -11,7 +11,6 @@ import lombok.*;
 @AllArgsConstructor
 public class FxDealDto {
 
-
     @NotBlank(message = "UniqueId cant be blank")
     @Size(min = 1, message = "UniqueId cannot be empty")
     private String uniqueId;
