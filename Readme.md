@@ -154,7 +154,23 @@ Distributes the HTTP request which contains the Fx Deal to one of the DataWareHo
 replicas based on Round-Robin Algorithm.
 
 
+### Makefile
+MakeFile is added to run re-occuring scripts, like maven build, or docker-compose up, or docker-compose down.
+I added all these rules in the MakeFile
 
+``` 
+  NAME := ProgressSoft_Project
+  BUILD_TOOL := ./mvnw
+  
+  build :
+  	mvn clean install
+  
+  docker-up : build
+  	docker-compose up -d
+  docker-down :
+  	docker-compose down -d
+
+```
 
 
 <link rel="stylesheet" type="text/css" href="styles.css">
