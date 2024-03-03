@@ -178,6 +178,58 @@ I added all these rules in the MakeFile
 
 I created a docker container for each microservice, I created two containers of datawarehouse, but each running on different port.
 These containers communicate to each other through docker network. this project can be upgraded using kubernetes to enable auto-scaling -horizental scalling- .
+
+```docker
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 12321
+      MYSQL_DATABASE: fxdeals
+    ports:
+      - "3307:3306"
+  datawarehouse1:
+    build: /DataWareHouse
+    restart: on-failure
+    container_name: datawarehouse1-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+  datawarehouse2:
+    build: /DataWareHouse
+    restart: on-failure
+    container_name: datawarehouse2-container
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mysql
+  eureka-server:
+    build: /EurekaServer
+    image: spring-cloud/eureka
+    container_name: eureka-server
+    ports:
+      - "9090:9090"
+  load-balancer:
+    build: /LoadBalancer
+    container_name: load-balancer
+    ports:
+      - "8085:8085"
+  bloom-berg:
+    build: /BloomBergAPI
+    container_name: bloom-berg
+    ports:
+      - "8082:8082"
+
+```
+
+---
+### MySQL Server
+
 MySQL server image is also used, but no volumes are made because no need to persist the data. I just made it as a proof of concept.
 MySQL server takes time to start, so when springboot containers try to connect they will through an exception,
 that's why in the docker-compose I used the property **restart: on-failure**, in this case until mysql server starts up,
