@@ -158,7 +158,7 @@ replicas based on Round-Robin Algorithm.
 MakeFile is added to run re-occuring scripts, like maven build, or docker-compose up, or docker-compose down.
 I added all these rules in the MakeFile
 
-```bash
+```make
   NAME := ProgressSoft_Project
   BUILD_TOOL := ./mvnw
   
