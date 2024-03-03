@@ -153,12 +153,14 @@ Used to register eureka clients, in order to achieve loadBalancing.
 Distributes the HTTP request which contains the Fx Deal to one of the DataWareHouse 
 replicas based on Round-Robin Algorithm.
 
+---
 
 ### Makefile
 MakeFile is added to run re-occuring scripts, like maven build, or docker-compose up, or docker-compose down.
 I added all these rules in the MakeFile
 
 ```make
+
   NAME := ProgressSoft_Project
   BUILD_TOOL := ./mvnw
   
@@ -171,6 +173,17 @@ I added all these rules in the MakeFile
   	docker-compose down -d
 
 ```
+---
+### Docker Compose
 
+I created a docker container for each microservice, I created two containers of datawarehouse, but each running on different port.
+These containers communicate to each other through docker network. this project can be upgraded using kubernetes to enable auto-scaling -horizental scalling- .
+MySQL server image is also used, but no volumes are made because no need to persist the data. I just made it as a proof of concept.
+MySQL server takes time to start, so when springboot containers try to connect they will through an exception,
+that's why in the docker-compose I used the property **restart: on-failure**, in this case until mysql server starts up,
+Springboot containers will keep trying to connect until they succeed.
+you can connect on port 3307 from localhost, or you can use mysql workbench. check table name fxDeals. as you can see in the below image, this shows how data is saved in the table.
+
+![Alt Text](images/table.png)
 
 <link rel="stylesheet" type="text/css" href="styles.css">
