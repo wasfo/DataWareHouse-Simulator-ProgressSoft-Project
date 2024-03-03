@@ -31,7 +31,7 @@ Additionally I used these Libraries within SpringBoot:
 We can simply enable load balancing, but creating a *RestTemplate* object and annotate it with @LoadBalanced
 In LoadBalancer Module.
 
-```
+```java
   @Bean("ImportFxDealTemplate")
     @LoadBalanced
     public RestTemplate importFxDealTemplate() {
@@ -43,7 +43,7 @@ In LoadBalancer Module.
 ---
 * **Spring Data Validation**:
   Used to validate FxDeals data to prevent missing or incorrect data.
-```
+```java
 public class FxDealDto {
     
     @NotBlank(message = "UniqueId cant be blank")
@@ -68,7 +68,7 @@ public class FxDealDto {
 ```
 * **Spring Data JPA**:
   Used to establish database connection and execute queries through hibernate implementation.
-```
+```java
 @Repository
 public interface FXDealRepository extends JpaRepository<FXDeal, String> {
 }
@@ -86,7 +86,7 @@ I use <div class="background">@Scheduled</div> to generate Fx Deal object every 
 and http post the request to loadbalancer.
 <div class="note"> <p>This is Just used to Mock LIVE Data fetching</p> </div>
 
-``` 
+```java
     @Scheduled(fixedRate = 10000)
     public void sendFxDealsToLoadBalancer() throws IOException {
 
@@ -120,7 +120,7 @@ and http post the request to loadbalancer.
 
 ### DataWareHouse MicroService
 This service accepts Fx Deals, Validates them and then saves them in database in case they're unique.
-``` 
+```java
   @PostMapping("/save")
     public void importDeal(@RequestBody FxDealDto deal) {
 
@@ -158,7 +158,7 @@ replicas based on Round-Robin Algorithm.
 MakeFile is added to run re-occuring scripts, like maven build, or docker-compose up, or docker-compose down.
 I added all these rules in the MakeFile
 
-``` 
+```bash
   NAME := ProgressSoft_Project
   BUILD_TOOL := ./mvnw
   
