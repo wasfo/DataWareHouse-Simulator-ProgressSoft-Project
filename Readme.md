@@ -179,7 +179,7 @@ I added all these rules in the MakeFile
 I created a docker container for each microservice, I created two containers of datawarehouse, but each running on different port.
 These containers communicate to each other through docker network. this project can be upgraded using kubernetes to enable auto-scaling -horizental scalling- .
 
-```compose
+```make
 version: '3.8'
 
 services:
